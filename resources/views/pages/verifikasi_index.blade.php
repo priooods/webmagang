@@ -8,7 +8,7 @@
                 <form method="GET" action="{{ route('verify.export') }}" class="mr-auto my-auto">
                     <button type="submit" class="text-white text-sm font-semibold bg-green-600 px-3.5 py-1 border border-green-600 rounded-lg cursor-pointer">Export Excel</button>
                 </form>
-                <form method="GET" >
+                <form method="GET" action="{{ route('admin.searching') }}" >
                     <input
                         type="text"
                         name="search"

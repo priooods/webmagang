@@ -33,11 +33,25 @@ class DashboardController extends Controller
         return view('pages.pengajuan_index', compact('data'));
     }
 
+    public function PengajuanSearching(Request $request)
+    {
+        session_start();
+        if (!isset($_SESSION['user_id']))
+            return redirect('/');
+
+        $query = TRequestTabs::query();
+        if ($search = $request->search) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        $data = $query->where('users_tabs_id', $_SESSION['user_id'])->with('status')->orderBy('id', 'desc')->paginate(10);
+        return view('pages.pengajuan_index', compact('data'));
+    }
+
     public function verify(Request $request)
     {
         session_start();
         if (!isset($_SESSION['sso_user_id']))
-            return redirect('/dashboard/verify');
+            return redirect('/admin/login');
 
         $query = TRequestTabs::query();
         if ($search = $request->search) {
@@ -52,7 +66,7 @@ class DashboardController extends Controller
     {
         session_start();
         if (!isset($_SESSION['sso_user_id']))
-            return redirect('/dashboard/verify');
+            return redirect('/admin/login');
 
         return Excel::download(new MagangExport, 'ReportMagang.xlsx');
     }
@@ -347,5 +361,20 @@ class DashboardController extends Controller
             return redirect('/');
         $find = TRequestTabs::where('id', $id)->delete();
         return redirect('dashboard/riwayat');
+    }
+
+    public function AdminSearching(Request $request)
+    {
+        session_start();
+        if (!isset($_SESSION['sso_user_id']))
+            return redirect('/admin/login');
+
+        $query = TRequestTabs::query();
+        if ($search = $request->search) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        $data = $query->where('m_status_tabs_id', '!=', 1)->with('status')->orderBy('id', 'asc')->paginate(10);
+
+        return view('pages.verifikasi_index', compact('data'));
     }
 }

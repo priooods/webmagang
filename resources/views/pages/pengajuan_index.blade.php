@@ -4,7 +4,7 @@
         <p class=" font-[rubik] font-[700] md:text-2xl">Riwayat Pengajuan Magang</p>
         <p class="font-[rubik] md:text-sm">Anda dapat melihat semua riwayat pengajuan magang anda dibawah ini</p>
         <div class="mt-14">
-            <form method="GET" class="flex justify-end mb-3">
+            <form method="GET" action="{{ route('pengajuan.searching') }}" class="flex justify-end mb-3">
                 <input
                     type="text"
                     name="search"

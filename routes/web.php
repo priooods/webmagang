@@ -33,6 +33,7 @@ Route::get('/auth/register', [AuthController::class, 'index'])->name('register')
 Route::get('/auth/logout', [AuthController::class, 'destroy'])->name('logout');
 Route::post('/auth/register/store', [AuthController::class, 'store'])->name('register.store');
 Route::get('/dashboard/riwayat', [DashboardController::class, 'index']);
+Route::get('/dashboard/pengajuan/searching', [DashboardController::class, 'PengajuanSearching'])->name('pengajuan.searching');
 Route::get('/dashboard/show/{id}', [DashboardController::class, 'show'])->name('store.show');
 Route::get('/dashboard/change/{id}', [DashboardController::class, 'editpage']);
 Route::get('/dashboard/form', [DashboardController::class, 'create']);
@@ -43,6 +44,7 @@ Route::delete('/dashboard/destroy/{id}', [DashboardController::class, 'destroy']
 
 Route::post('/auth/admin/login', [AuthController::class, 'admin'])->name('login.admin');
 Route::get('/dashboard/verify', [DashboardController::class, 'verify']);
+Route::get('/dashboard/searching', [DashboardController::class, 'AdminSearching'])->name('admin.searching');
 Route::post('/dashboard/verify/response/{id}', [DashboardController::class, 'update'])->name('verify.saved');
 Route::get('/dashboard/verify/show/{id}', [DashboardController::class, 'verifyshow'])->name('verify.show');
 Route::get('/dashboard/verify/export', [DashboardController::class, 'exportExcel'])->name('verify.export');
